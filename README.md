@@ -7,3 +7,7 @@ Anthony El Moundalak
 5- If you want to send another photo, put the photo in ./api directory and adjust the post.py file
 6- If you want to send a text file, only adjust the post.py file and put your text inside the context variable in data json variable
 
+PS: you can adjust your minio credentials from Dockerfile and docker-compose.yml
+Default username : access-key
+Default password : secret-key
+To login in minio 
