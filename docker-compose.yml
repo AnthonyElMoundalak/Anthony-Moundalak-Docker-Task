@@ -9,6 +9,13 @@ services:
       - "5000:5000"
     depends_on:
       - minio
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app-network
   minio:
     # Build the minio service 
     #
@@ -22,6 +29,17 @@ services:
       - "9000:9000"
       - "9001:9001"
     command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app-network
       
 volumes:
   minio_data:
+  
+networks:
+  app-network:
+    driver: bridge
